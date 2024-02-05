@@ -2,7 +2,7 @@
 title: "Files-and-Folders-Day1"
 author: "Shady Kuster"
 date: "2024-02-05"
-output: pdf_document
+output: html_document
 ---
 
 
@@ -84,10 +84,10 @@ Use the code chunk below to change your cwd to your Documents directory. Make su
 
 ```{r}
 #remove the # symbol before the function, fill in the double quotes with your desired path, and run this code chunk
-#setwd("")
+setwd("C:/Users/kemar/Documents")
 
 #also add your path here, for later use:
-docDir <- ""
+docDir <- "C:/Users/kemar/Documents"
 
 ```
 
@@ -125,6 +125,14 @@ Find a more complicated directory to change into and use the code chunk below to
 ```{r}
 #setting cwd to a file somewhere else on computer
 
+setwd("~/GitHub/CSU_CM515_2024/modules/03_Files_and_Folders")
+setwd("../..")
+getwd()
+
+#a fun fact I figured out... when you copy from file explorer you get the back slashes
+"C:\Users\kemar\Documents\GitHub\CSU_CM515_2024\modules\03_Files_and_Folders\genetics"
+#but when you copy the folder path to clipboard in R in the files tab in the corner (in R) it will give it to you with the forward slashes
+~/GitHub/CSU_CM515_2024/modules/03_Files_and_Folders/genetics
 ```
 
 *Some extra info*
@@ -135,7 +143,6 @@ Give it a try above if you want. The first ".." brings you to courses, and the s
 
 **NOTE FOR WINDOWS USERS**
 Hey there, former Windows user here. You may have noticed above with your File Explorer that it showed you something like this: "C:\Documents\folder1\folder2". Windows uses the backslash in its directory structure. Pretty much everything else uses the forward slash, including R, so anytime you code and are referencing files or directories, you'll need to change the backslash, "\", to a forward slash, "/", or you will receive an error. I always did this by doing a search and replace (Cntrl + H) either in R or in a text file. 
-
 
 
 
