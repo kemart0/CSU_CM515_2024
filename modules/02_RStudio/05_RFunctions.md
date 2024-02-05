@@ -2,11 +2,11 @@
 
 ## Reviewing the learning objectives for this module
 
-  1. Let's **start fresh** with coding
-  2. Students will learn about R: it's **history** and how it is **useful in biological research**
-  3. Students will learn how to **interface** with R and RStudio
-  4. Students will become familiar with a few basic **R objects** (or extend their knowledge into new objects)
-  5. Students will execute a few basic **R functions** (or extend their knowledge into new functions)
+  - [x] Let's **start fresh** with coding
+  - [x] Students will learn about R: it's **history** and how it is **useful in biological research**
+  - [x] Students will learn how to **interface** with R and RStudio
+  - [x] Students will become familiar with a few basic **R objects** (or extend their knowledge into new objects)
+  - [ ] Students will execute a few basic **R functions** (or extend their knowledge into new functions)
     
 ## Maybe in this module or next ones:
   * **Next:** Students will learn to **import and export** data
@@ -74,17 +74,62 @@ help(dim)
 help(mean)
 ```
 
-This help menu also specifies the **options** that the mean function takes and their **default** values. As a default, trim is set to 0. In other words, all the values are used to calculate the mean. However, this value can be changed to 0.2, in which case, the most extreme 20 % of all datapoints will be removed before the mean is calculated. 
+This help menu also specifies the **options** that the mean function takes and their **default** values. As a default, **trim** is set to 0 and **na.rm** is set to **FALSE**. In other words, all the values are used to calculate the mean. However, this value can be changed to 0.2, in which case, the most extreme 20 % of all datapoints will be removed before the mean is calculated. 
 
-➡️ Give it a try:
-
-```r
-mean(chromosomes, trim = 0.2)
-```
 
 ⚠️ **GRAPHICAL SUMMARY** 
 
 <img src="webContent/WebContent_Powerpoint_functionGrammar.jpg" width="600">
+
+
+➡️ Give it a try:
+
+```r
+# Take the average # of chromosomes
+mean(chromosomes)
+
+# Take the average # of chromosomes of 80 % of the data
+mean(chromosomes, trim = 0.2)
+```
+
+### What does na.rm mean?
+
+When we look up the help page for **mean**, one thing we encounter is...
+
+<img src="webContent/Screen Shot 2024-01-30 at 7.11.00 PM.png" width="800">
+
+  * **NA**, or Not Available, should be written in place of any **missing values**
+  * **NaN**, or Not a Number, should be written in place of any **impossible numbers**. For example, a number divided by 0.
+
+What happens if we try to take the mean of a vector that has an NA in the list? 
+
+➡️ Let's try it:
+
+```
+# create a vector with an NA in it:
+incompleteVector <- c(2, 5, 8, 9, 10, 200, NA, 3)
+mean(incompleteVector)
+[1] NA
+
+```
+
+hmmm... Looks like it won't let me. This is where **na.rm** comes in. It mean **NA Remove** and by setting it to TRUE, you can override the behavior by removing all the NAs first, and then taking the mean on the remaining values second.
+
+➡️ Try na.rm
+
+```
+mean(incompleteVector, na.rm = TRUE)
+[1] 33.85714
+
+```
+
+**REVIEW**
+
+  * R functions have parentheses
+  * Sometimes nothing goes in them: `function()`
+  * **Arguments:** `function(argument)` - your function will take an argument as input
+  * **Options:** `function(argument, option1 = TRUE, option2 = 100)` -  You can customize how the function operates by adding optional information. 
+
 
 Continue on to [Importing and Exporting Data](06_ImportExport.md)
 
