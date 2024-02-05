@@ -67,32 +67,7 @@ as.numeric(super_vector)
 ```
 Trying to covert this vector to a numeric introduces an error/NA since the character vectors (words) can't be converted to numbers
 
-❗ **EXERCISE: Baby's first data frame**
 
-``` {r}
-# Ensure you have a character vector called organism with a length of 5
-str(organism)
-
-# Ensure you have a factor vector called kingdom with a length of 5
-str(kingdom)
-
-# Create a numeric vector called chromosomes with corresponding data:
-chromosomes <- c(23, 20, 5, 16, 10)
-str(chromosomes)
-
-# Create a logical vector called haploid with corresponding data
-haploid <- c(FALSE, FALSE, FALSE, TRUE, FALSE)
-str(haploid) 
-
-# Now, put it all together using the function data.frame()
-model_systems <- data.frame(organism, chromosomes, kingdom, haploid)
-
-# Explore what you have created
-model_systems
-dim(model_systems)
-str(model_systems)
-class(model_systems)
-```
 ## QUESTION 4 (5 pts)
 
 :white_check_mark: Students will become familiar with a few basic R objects - data frames
@@ -145,6 +120,19 @@ Let's practice importing some data. Here is a real supplementary dataset that my
   * Note - .csv stands for "comma separated value"
   * What is the output of `str(signal_to_noise)`? **Copy and paste it here as the answer to this question.**
   * If you were NOT able to get this to work, please explain what you tried, what is going wrong, and any output or error messages you are getting.
+  
+``` {r} 
+setwd("~/GitHub/CSU_CM515_2024/modules/02_RStudio/work")
+  
+read.csv("Table_S4_Signal_to_noise_quantification_table.csv")
+
+signal_to_noise<- read.csv("Table_S4_Signal_to_noise_quantification_table.csv")
+
+head(signal_to_noise)
+str(signal_to_noise)
+  
+```
+  
 
 
 
@@ -299,7 +287,7 @@ To import a file, we need to set R's working directory to match the directory wh
 We will use the command `read.table()` to import the dataset
 
 ``` {r}
-setwd("~/GitHub/CSU_CM515_2024/modules/02_RStudio/1_31_24")
+setwd("~/GitHub/CSU_CM515_2024/modules/02_RStudio/work")
 # Check we're in the right place
 getwd() 
 
@@ -316,20 +304,20 @@ read.table("US_COVID_Vacc_by_StateTerr.csv", sep = ",", header = TRUE, row.names
 # To capture the data, use an assignment expression:
 VaxByState <- read.table("US_COVID_Vacc_by_StateTerr.csv", sep = ",", header = TRUE, row.names = "location")
 
-:+1: Use help(read.table) to learn how you can also use read.csv or read.csv2 to upload comma separated content, also! There are many ways to do the same thing in R.
+#+1: Use help(read.table) to learn how you can also use read.csv or read.csv2 to upload comma separated content, also! There are many ways to do the same thing in R.
 
-vaxbystate
+VaxByState
 
 ```
 ```{r}
-setwd("~/GitHub/CSU_CM515_2024/modules/02_RStudio/1_31_24")
-colnames(vaxbystate)
+setwd("~/GitHub/CSU_CM515_2024/modules/02_RStudio/work")
+colnames(VaxByState)
 
 # It looks like we want columns 1, 5, & 11
 
 # Let's subset the data to create a new object called 
 #leave all the rows: square bracket, space, comma, then (rows you want)
-vaxbystate_summary <- VaxByState[ , c(1,5,11)]
+VaxByState_summary <- VaxByState[ , c(1,5,11)]
 
 dim(VaxByState_summary)
 head(VaxByState_summary)
