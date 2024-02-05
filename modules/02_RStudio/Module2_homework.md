@@ -1,6 +1,6 @@
 # Assignment 1
 
-**Due:** ?
+**Due:** 2/7/24
 
 **Instructions:** 
   * Please turn in the answers to this assignment as a .txt document. To create a .txt document in R, go to **New File**, then select **Text file**. You can use any other text editor if you like. Please do not use Mac's Text Edit application, though.
@@ -53,10 +53,17 @@ Sys.sleep(5)
 *We learned that vectors come in different classes depending on the data type they house. Answer the following in phrases or sentences.*
 
 A. What are the classes of each of these vectors? 
-```r
+```{r}
+
 users <- c("alvin", "viet", "leila")
 logins <- c(12, 5, 34)
 ```
+
+``` {r}
+class("users"")
+class("logins"")
+```
+
 
 B. If we merge these vectors together into super_vector by concatenating them together (below), what is the class of super\_vector? Why do you think this happened?
 

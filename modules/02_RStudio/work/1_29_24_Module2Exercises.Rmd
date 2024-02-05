@@ -1,0 +1,365 @@
+---
+title: "1_29_24_HWModule2"
+author: "Kelsey Martin"
+date: "2024-01-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## QUESTION 1 (5 pts) 
+
+A. Answer the following: **What is your field of research?** You can use a rotation project or in-lab project. If you don't have a designated field of research, what is a field you would like to move into in the future?
+•	My field of research is centered around bacteriology and host-pathogen interactions.
+
+B. Think about the research you would like to do. Use the [Bioconductor Website](https://www.bioconductor.org/) to explore topics that are relevant to you. Answer the following: **What are the names and url's of 2 - 3 packages you would be interested to learn more about?**
+•	Some topics that I am likely to encounter in my research involve imaging in cell culture, to understand host responses with fluorescent microscopy. I would also likely use mass spectrometry analyses, and RNA-seq analysis
+•	1 package I would be interested in learning about it “cytomapper”, which allows analysis of multiplex imaging
+•	Another one would be “scuttle” which is used for single cell RNA seq
+
+C. Evaluate the documentation your packages have available. Compare the documentation between the 2 - 3 packages you selected. Answer: **Which packages appear easier to learn and why?**
+•	The cytomapper package seems quite a bit simpler, its reference manual is about half the length of scuttle.
+
+## QUESTION 2 (5 pts)
+
+*Let's explore R-studio a little bit by learning about shortcut keys. Try the following and report what happens: (answers in words, phrases, or short sentences)**
+
+A. What happens when you press **Alt+Shift+K** on a PC/Linux or **Option+Shift+K** on a Mac?
+•	You get a guide for keyboard shortcuts
+B. What happens when you are working on the "Console" and you press the **up arrow**?
+•	It moves up the lines of code
+C. What happens when you are working on the "Console" and you press **CTRL+L**?
+•	This clears the console
+D. What shortcut key helps you escape out of an executed command on the "Console"? For example, try executing a sleep function. This puts R to sleep for 5 minutes. (in other words - What would you press to return to the prompt before 5 minutes is complete?)
+•	The Escape key will stop the code from running, it will return the prompt even if the sleep function is not complete.
+
+
+## HOMEWORK QUESTION 3 (5 pts)
+
+:white_check_mark: Students will become familiar with a few basic R objects - vectors
+
+:white_check_mark: Students will execute a few basic R functions
+
+*We learned that vectors come in different classes depending on the data type they house. Answer the following in phrases or sentences.*
+
+A. What are the classes of each of these vectors?
+
+``` {r}
+users <- c("alvin", "viet", "leila")
+logins <- c(12, 5, 34)
+class(users)
+class(logins)
+```
+
+B. If we merge these vectors together into super_vector by concatenating them together (below), what is the class of super_vector? Why do you think this happened?
+
+``` {r}
+super_vector <- c(users, logins)
+class(super_vector)
+```
+
+C. How would you force super_vector into a numeric sub-class? *write the line of code* What happens? *copy the output and write a sentence explanation*
+
+```{r}
+as.numeric(super_vector)
+```
+Trying to covert this vector to a numeric introduces an error/NA since the character vectors (words) can't be converted to numbers
+
+❗ **EXERCISE: Baby's first data frame**
+
+``` {r}
+# Ensure you have a character vector called organism with a length of 5
+str(organism)
+
+# Ensure you have a factor vector called kingdom with a length of 5
+str(kingdom)
+
+# Create a numeric vector called chromosomes with corresponding data:
+chromosomes <- c(23, 20, 5, 16, 10)
+str(chromosomes)
+
+# Create a logical vector called haploid with corresponding data
+haploid <- c(FALSE, FALSE, FALSE, TRUE, FALSE)
+str(haploid) 
+
+# Now, put it all together using the function data.frame()
+model_systems <- data.frame(organism, chromosomes, kingdom, haploid)
+
+# Explore what you have created
+model_systems
+dim(model_systems)
+str(model_systems)
+class(model_systems)
+```
+## QUESTION 4 (5 pts)
+
+:white_check_mark: Students will become familiar with a few basic R objects - data frames
+
+:white_check_mark: Students will execute a few basic R functions
+
+Heather has written some code to create a data frame with columns for "languages", "greetings", and "partings". Each line of her code except the last line has a bug, or error. Can you de-bug Heather's code? Submit the re-written code.
+
+```   {r}      
+# Heather's code:
+languages <- ("English", "Spanish", "Japanese", "French")
+_greetings_ <- c("hello", "hola", "ohio", "bonjour")
+partings < c("bye", "adios", "mata", "salut")
+dictionary <- DataFrame(languages, _greetings_, partings)
+dimens(dictionary)
+dictionary
+```
+
+*Hint: The final line of code should give you the following output:*
+
+```         
+  languages greetings partings
+1   English     hello      bye
+2   Spanish      hola    adios
+3  Japanese      ohio     mata
+4    French   bonjour    salut
+```
+
+Turn in the amended code block.
+
+``` {r}        
+# Fixed code:
+languages <- c("English", "Spanish", "Japanese", "French")
+greetings <- c("hello", "hola", "ohio", "bonjour")
+partings <- c("bye", "adios", "mata", "salut")
+dictionary <- data.frame(languages, greetings, partings)
+dim(dictionary)
+dictionary
+```
+
+## QUESTION 5 (5 pts)
+
+Let's practice importing some data. Here is a real supplementary dataset that my lab recently published for a manuscript. 
+
+[Table_S4_Signal_to_noise_quantification_table.csv](https://drive.google.com/file/d/1bJy_ELikr5F264xRe-ASNI4iXBVYuxIP/view?usp=sharing)
+
+  * Download the file to your computer.
+  * Ensure your working directory is set properly
+  * Import the dataset into R using `read.csv()` and save it as an object called `signal_to_noise`
+  * Note - .csv stands for "comma separated value"
+  * What is the output of `str(signal_to_noise)`? **Copy and paste it here as the answer to this question.**
+  * If you were NOT able to get this to work, please explain what you tried, what is going wrong, and any output or error messages you are getting.
+
+
+
+
+
+#Other Exercises#
+
+``` {r}
+# assign a series of words to the vector object called organism:
+organism <- c("human", "mouse", "worm", "yeast", "maize")
+
+# Then, recall it:
+organism
+
+# How many elements are in this vector?
+length(organism)
+
+# What is the third element?
+organism[3]
+```
+``` {r}
+# Let's create a vector for each organism's kingdom like so:
+kingdom <- c("animalia", "animalia", "animalia", "fungi", "plantae")
+
+# What is the class of this vector?
+class(kingdom)
+
+# What is its structure?
+str(kingdom)
+
+# By default, this vector is a character vector. However, we can convert it to a character vector like so. This is a reassignment expression that overwrites the old vector kingdom with a factor vector.
+kingdom <- as.factor(kingdom)
+
+# check what happened:
+class(kingdom)
+str(kingdom)
+```
+
+``` {r}
+# Ensure you have a character vector called organism with a length of 5
+str(organism)
+
+# Ensure you have a factor vector called kingdom with a length of 5
+str(kingdom)
+
+# Create a numeric vector called chromosomes with corresponding data:
+chromosomes <- c(23, 20, 5, 16, 10)
+str(chromosomes)
+
+# Create a logical vector called haploid with corresponding data
+haploid <- c(FALSE, FALSE, FALSE, TRUE, FALSE)
+str(haploid) 
+
+# Now, put it all together using the function data.frame()
+model_systems <- data.frame(organism, chromosomes, kingdom, haploid)
+
+# Explore what you have created
+model_systems
+dim(model_systems)
+str(model_systems)
+class(model_systems)
+```
+
+```{r}
+model_systems$chromosomes
+```
+
+Subset: pull out slide of data format is [row, column]
+
+```{r}
+model_systems[2,3]
+model_systems[3, ]
+model_systems[ ,3]
+```
+
+``` {r}
+# How many rows are there?
+nrow(model_systems)
+
+# How many columns are there?
+ncol(model_systems)
+
+# What are the names of the columns?
+colnames(model_systems)
+
+# What is the dimension of the data frame?
+dim(model_systems)
+
+# What is the structure of this object?
+str(model_systems)
+
+# Can you give me a summary of the data?
+summary(model_systems)
+```
+
+
+
+```{r}
+mean(chromosomes)
+mean(chromosomes, trim=0.2)
+chromosomes
+mean(c(20,16,10))
+     
+test<-c(34, 35, 34, 36, NA)
+mean(test)
+mean(test, na.rm=TRUE)
+```
+## Importing Data
+
+❗**EXERCISE** Download a data file
+
+-   Go to [US_COVID_Vacc_by_StateTerr.csv](https://drive.google.com/file/d/1_0z0Bi3cg5GjWpz6FV23NMFw8V0kzQm_/view?usp=sharing)
+-   ➡️ Download the file by clicking the down arrow in the top right set of icons.
+-   ➡️ Save the file somewhere in your Documents directory/folder that makes sense. Consider adding it to your folder called "CM515" that contains this code.
+-   ➡️ Ensure the file name saved is "US_COVID_Vacc_by_StateTerr.csv" by viewing it in Finder or explorer.
+
+### Importing Data - Setting the working directory
+
+To import the file into R, we first need to sync up where R **thinks** it is working on your computer with the folder that contains a document you want to import. This is a bit tricky and will require some knowledge of **paths**.
+
+**Paths** - a path describes the location of a folder or file on your computer. Because folders are nested on a computer, the path will start on the left with the "topmost" or "outer most" directory, and then progressively list different sub-directories.
+
+In R, folder names are separated by a "/" character.
+
+To determine where R "thinks it is" on your computer, use the command `getwd()` for **get working directory**. **directory** is a more computer science-y term for "folder".
+
+``` r
+getwd()
+```
+
+The output is listed as a path. Notice how the output to getwd() matches with the folder names at the bottom of the "Finder" window and with the different folder icons.
+
+<img src="webContent/Screen Shot 2023-01-23 at 9.06.12 AM.png" width="600"/>
+
+:heavy_exclamation_mark: MAC tip: If you don't see you path in the Finder, pull down the View menu and select Show Path Bar.
+
+:heavy_exclamation_mark: PC tip: If you don't see your path in the Explorer, follow [these directions](https://pureinfotech.com/show-full-path-file-explorer-windows-10/)
+
+❗**EXERCISE** Setting the working directory
+
+To import a file, we need to set R's working directory to match the directory where our file lives.
+
+-   ➡️ Go to the **Files** Panel of RStudio.
+-   ➡️ Navigate to the location containing the downloaded dataset (may take some sleuthing)
+-   ➡️ Change the working directory by going to the **Files Menu Banner**, selecting **More**, and selecting **Set As Working Directory**
+-   ➡️ For posterity, copy and paste the command line that appears on the console that looks like `setwd(/directory/directory/)` into your .R script for next time
+
+## Importing Data - Reading in the data
+
+❗**EXERCISE** Together, let's write the code to read the data file into R.
+
+We will use the command `read.table()` to import the dataset
+
+``` {r}
+setwd("~/GitHub/CSU_CM515_2024/modules/02_RStudio/1_31_24")
+# Check we're in the right place
+getwd() 
+
+# Check how read.table is used
+help(read.table)
+
+# Look at the data using read.table
+read.table("US_COVID_Vacc_by_StateTerr.csv", sep = ",", header = TRUE)
+
+# Actually, I don't like those number row names
+read.table("US_COVID_Vacc_by_StateTerr.csv", sep = ",", header = TRUE, row.names = "location")
+
+# That only printed out the data from the file, it didn't capture it.
+# To capture the data, use an assignment expression:
+VaxByState <- read.table("US_COVID_Vacc_by_StateTerr.csv", sep = ",", header = TRUE, row.names = "location")
+
+:+1: Use help(read.table) to learn how you can also use read.csv or read.csv2 to upload comma separated content, also! There are many ways to do the same thing in R.
+
+vaxbystate
+
+```
+```{r}
+setwd("~/GitHub/CSU_CM515_2024/modules/02_RStudio/1_31_24")
+colnames(vaxbystate)
+
+# It looks like we want columns 1, 5, & 11
+
+# Let's subset the data to create a new object called 
+#leave all the rows: square bracket, space, comma, then (rows you want)
+vaxbystate_summary <- VaxByState[ , c(1,5,11)]
+
+dim(VaxByState_summary)
+head(VaxByState_summary)
+
+# Now, let's explore the function write.table() 
+help(write.table)
+
+write.table(VaxByState, file="Vaccinations_by_state_SUMMARY.txt", sep="\t)")
+write.table(VaxByState, file="Vaccinations_by_state_SUMMARY.txt", sep="\t)", quote=FALSE)
+
+```
+## Making a Plot
+
+```{r}
+
+# We can use integer or numeric or integer classes as input
+str(VaxByState)
+
+# Use colnames to see the options for data we have available:
+colnames(VaxByState)
+
+# We'll use these x-values...
+xVacc <- VaxByState$people_vaccinated_per_hundred
+
+# ... and these y-values:
+yBoost <- VaxByState$total_boosters_per_hundred
+
+# Let's plot it!
+plot(xVacc, yBoost)
+
+# Let's add some labels
+text(xVacc, yBoost, rownames(VaxByState),col='darkblue', pos = 4, cex = 0.8)
+```
