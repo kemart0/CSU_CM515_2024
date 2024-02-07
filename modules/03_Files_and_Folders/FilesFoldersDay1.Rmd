@@ -1,6 +1,6 @@
 ---
 title: "Files-and-Folders-Day1"
-author: "Shady Kuster"
+author: "Shady Kuster/Kelsey Martin"
 date: "2024-02-05"
 output: html_document
 ---
@@ -189,7 +189,7 @@ CHECK YOUR WORKING DIRECTORY BEFORE RUNNING. Access it in your File Explorer/Fin
 
 ```{r, echo = F}
 #CHECK WORKING DIRECTORY BEFORE RUNNING
-
+setwd("~/courses/genetics/ape/giraffe/elephant")
 write(message, "~/courses/genetics/Output.txt")
 
 # Note that if we wanted to write this file in a different directory, we could tell our computer to do this with a path (either relative or absolute):
@@ -214,6 +214,7 @@ Erin will probably tell you about this, but often in coding and bioinformatics, 
 The following code will read a file for you & print its contents. 
 
 ```{r}
+setwd("~/courses/genetics")
 string <- paste(readLines("Output.txt"))
 string
 
@@ -250,20 +251,23 @@ A common problem solving approach when working with computers is to do something
 ```{r}
 ###do not edit#####
 setwd("~/courses/genetics/ape/giraffe/elephant")
-#I keep having my working directory change back, so just put this in the console
+#I keep having my working directory change back
 write(error, "Help.txt")
 
-paste(readLines(printer)) 
+
 ####do not edit####
+#printer is currently printer <- "/warmer/hotter/Help.txt"
+#I'm changing it because I don't want to make new folders!
 
 #do your problem solving here:
 paste(readLines("Help.txt"))
-#this works! What is th printer thing though?
-print(readLines("Help.txt"))
+#this works
+printer<-("Help.txt")
 #a helpful command we've used in previous code chunks to read a file:
 #paste(readLines())
 #command to print to standard output:
 #print("")
+paste(readLines(printer)) 
 ```
 
 
@@ -276,7 +280,11 @@ Often, we need to find the function we need via google or other sources. Reading
 hint: What is the "\n" character? 
 
 ```{r}
-
+setwd("~/courses/genetics/ape/giraffe/elephant")
+library(stringr)
+#using a guide from geeksforgeeks (https://www.geeksforgeeks.org/remove-newline-from-character-string-in-r/#)
+x<-paste(readLines("Help.txt"))
+xnew<-cat(gsub("[\r\t]", " ", x))
 ```
 
 
