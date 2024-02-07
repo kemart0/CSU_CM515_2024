@@ -1,3 +1,0 @@
-This is your input file. 
-
-it may have data or something else in it. 

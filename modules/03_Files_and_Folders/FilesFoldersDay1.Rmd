@@ -89,6 +89,7 @@ setwd("C:/Users/kemar/Documents")
 #also add your path here, for later use:
 docDir <- "C:/Users/kemar/Documents"
 
+
 ```
 
 *Lesson 1 with computers:* Computers are case sensitive and will not know that when you write documents you actually mean Documents
@@ -130,9 +131,9 @@ setwd("../..")
 getwd()
 
 #a fun fact I figured out... when you copy from file explorer you get the back slashes
-"C:\Users\kemar\Documents\GitHub\CSU_CM515_2024\modules\03_Files_and_Folders\genetics"
-#but when you copy the folder path to clipboard in R in the files tab in the corner (in R) it will give it to you with the forward slashes
-~/GitHub/CSU_CM515_2024/modules/03_Files_and_Folders/genetics
+#"C:\Users\kemar\Documents\GitHub\CSU_CM515_2024\modules\03_Files_and_Folders\genetics"
+#but when you copy the folder path to clipboard in R in the files tab in the corner it will give it to you with the forward slashes
+#~/GitHub/CSU_CM515_2024/modules/03_Files_and_Folders/genetics
 ```
 
 *Some extra info*
@@ -157,7 +158,7 @@ Use the first part of the following code chunk to navigate into the genetics dir
 ```{r}
 #use the following space to set your working directory according to the instructions above
 
-
+setwd("C:/Users/kemar/Documents/courses/genetics")
 
 
 ####do not edit this####
@@ -188,7 +189,8 @@ CHECK YOUR WORKING DIRECTORY BEFORE RUNNING. Access it in your File Explorer/Fin
 
 ```{r, echo = F}
 #CHECK WORKING DIRECTORY BEFORE RUNNING
-write(message, "Output.txt")
+
+write(message, "~/courses/genetics/Output.txt")
 
 # Note that if we wanted to write this file in a different directory, we could tell our computer to do this with a path (either relative or absolute):
 
@@ -231,8 +233,7 @@ Note: if you write something in the text file when you make it and do not press 
 
 ```{r, echo = F}
 #do not edit anything in this code chunk
-animalPath <- paste(userDir, "/ape/giraffe/elephant/AnimalNames.txt", sep = "")
-
+animalPath <- paste(docDir, "/courses/genetics/ape/giraffe/elephant/AnimalNames.txt", sep = "")
 paste(readLines(animalPath))
 
 ```
@@ -248,13 +249,17 @@ A common problem solving approach when working with computers is to do something
 
 ```{r}
 ###do not edit#####
+setwd("~/courses/genetics/ape/giraffe/elephant")
+#I keep having my working directory change back, so just put this in the console
 write(error, "Help.txt")
 
 paste(readLines(printer)) 
 ####do not edit####
 
 #do your problem solving here:
-
+paste(readLines("Help.txt"))
+#this works! What is th printer thing though?
+print(readLines("Help.txt"))
 #a helpful command we've used in previous code chunks to read a file:
 #paste(readLines())
 #command to print to standard output:
