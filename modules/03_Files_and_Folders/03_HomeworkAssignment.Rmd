@@ -1,6 +1,6 @@
 ---
 title: "Files-Folders-Homework"
-author: "Shady Kuster"
+author: "Kelsey Martin"
 date: "2024-02-04"
 output: html_document
 ---
@@ -8,7 +8,7 @@ output: html_document
 
 ```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
-
+knitr::opts_knit$set(root.dir = "~/GitHub/CSU_CM515_2024/modules/03_Files_and_Folders")
 library("fs")
 
 ```
@@ -17,17 +17,24 @@ library("fs")
 
 To recieve full credit, complete all sections. Upload your knitted Rmd in html, not Rmd, to Canvas. If you are having issues knitting your Rmd, email Shady (shady.kuster@colostate.edu), email David (david.king@colostate.edu), or attend coding club this Friday for help. I'm (shady) happy to meet in person, too, if that is more helpful, but I am likely unable to attend coding club due to prior commitments.  
 
-This assignment is due *February 15th at 11:59 PM*. 
+This assignment is due *February 14th at 10AM*. 
 
 
 ## Conceptual Questions
 
 1) What is the difference between an absolute path and a relative path?
 
+Absolute path is the full/complete directions to a file or folder, while a relative path gives the directions based on current location within a directory.
+
 2) When might you use a relative or an absolute path?
+
+You would use it when you are trying to direct R to a location, like to read or write a file. When you use a relative path you would use the "~" symbol to indicate the directions start at the CWD.
+
+*QUESTION: Are there some cases where you have to use an absolute or relative path (and the other wouldn't work)?*
 
 3) If you get the error "cannot open file 'example.csv': No such file or directory", what things should you check first?
 
+You should check to make sure your working directory is where you think it is (`getwd()`), check the names and spelling and cases of the directions you gave as well.
 
 ## Applied Questions
 
@@ -40,7 +47,10 @@ Projects contains a directory called Linkage and two text files: 1) to-do.txt an
 
 ```{r}
 #Question 4
-
+message1<- "grade 300 exams, run 12 6 hour experiments, study for 27  hours, somehow get sleep"
+message2<-"Projects:\n cabin in the woods\n electritian certification\n win lottery"
+write(message1, "Exfolder/Projects/Linkage/to-do.txt")
+write(message2, "Exfolder/Projects/Linkage/project-ideas.txt")
 ```
 
 5) Make sure you have downloaded the HomeworkAssignmentInput.txt file from Canvas. 
@@ -58,7 +68,7 @@ b) copy the file to the Silene directory, and read in the file from that directo
 
 ```{r}
 #Question 5b 
-paste(readLines("")) #fill in path here
+paste(readLines("Exfolder/Plants-Genera/Silene/HomeworkAssignmentInput.txt")) #fill in path here
 
 dir_tree(".") #keep this here
 
@@ -68,6 +78,7 @@ c) now, change your working directory to be able to read the file from the Silen
 
 ```{r}
 #Question 5c
+setwd("~/GitHub/CSU_CM515_2024/modules/03_Files_and_Folders/Exfolder/Plants-Genera/Silene")
 #add what you need to here
 
 paste(readLines("HomeworkAssignmentInput.txt")) #do not change this line
