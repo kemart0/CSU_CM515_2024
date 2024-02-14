@@ -1,6 +1,6 @@
 ---
 title: "TidyverseDay2"
-author: "YOUR NAME"
+author: "Kelsey Martin"
 output: html_document
 date: "2024-02-06"
 ---
