@@ -86,6 +86,7 @@ summary(surveys$taxa)
 
 ```{r}
 #Q5B
+nlevels(surveys$genus)
 
 ```
 
@@ -93,6 +94,9 @@ summary(surveys$taxa)
 
 ```{r}
 #Q6
+sex<- factor(surveys$sex)
+sex<- addNA(sex)
+levels(sex)
 
 ```
 
@@ -100,13 +104,19 @@ summary(surveys$taxa)
 
 ```{r}
 #Q7
-
+#Rename third level
+levels(sex)[3] <- "undetermined"
+plot(sex)
 ```
 
 #### Q8: Using pipes, subset the surveys data to include animals collected before 1995 and retain only the columns year, sex, and weight. View the tail() of the data.frame.
 
 ```{r}
 #Q8
+surveys %>% 
+  filter(year<1995) %>% 
+  select(year, sex, weight) %>% 
+  tail()
 
 ```
 
@@ -122,6 +132,12 @@ summary(surveys$taxa)
 
 ```{r}
 #Q9 
+surveys_hindfeet<- surveys %>% 
+  filter(!is.na(hindfoot_length)) %>% 
+  mutate(hindfoot_cm=hindfoot_length/10) %>% 
+  filter(hindfoot_cm<3) %>% 
+  select(species_id, hindfoot_cm) 
+head(surveys_hindfeet)
 
 ```
 
@@ -129,6 +145,8 @@ summary(surveys$taxa)
 
 ```{r}
 #Q10
+surveys %>% 
+  count(plot_type)
 
 ```
 
@@ -136,7 +154,13 @@ summary(surveys$taxa)
 
 ```{r}
 #Q11
-
+surveys %>% 
+  filter(!is.na(hindfoot_length)) %>% 
+  group_by(species_id) %>% 
+  summarise(mean_hindfootlength=mean(hindfoot_length),
+            min_hindfootlength=min(hindfoot_length),
+            max_hindfootlength=max(hindfoot_length),
+            observations=n())
 ```
 
 #### Q12: What was the heaviest animal measured in each year? Return the columns year, genus, species_id, and weight.

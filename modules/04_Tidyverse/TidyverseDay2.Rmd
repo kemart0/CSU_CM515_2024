@@ -6,6 +6,7 @@ date: "2024-02-06"
 ---
 
 Chunk 0
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -13,12 +14,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Let's start! --------------------------------
 
 Chunk 1
+
 ```{r}
 #Load libraries
 library(tidyverse)
 ```
 
 Chunk 2
+
 ```{r}
 #Load data
 surveys <- read_csv("diversity.csv")
@@ -27,12 +30,14 @@ surveys <- read_csv("diversity.csv")
 ## Dplyr: Selecting columns --------------------------------
 
 Chunk 3
+
 ```{r}
 #Select
 select(surveys, plot_id, species_id, weight)
 ```
 
 Chunk 4
+
 ```{r}
 #Select all columns except certain ones 
 select(surveys, -record_id, -species_id)
@@ -41,8 +46,10 @@ select(surveys, -record_id, -species_id)
 ## Dplyr: Filtering rows --------------------------------
 
 Chunk 5
+
 ```{r}
 #Filter
+
 filter(surveys, year == 1995)
 ```
 
@@ -51,6 +58,7 @@ filter(surveys, year == 1995)
 ## Pipes Example #1
 
 Chunk 6
+
 ```{r}
 #Pipes step by step
 #Original data
@@ -58,6 +66,7 @@ surveys
 ```
 
 Chunk 7
+
 ```{r}
 #Pipes step by step
 #Filter
@@ -66,6 +75,7 @@ surveys2
 ```
 
 Chunk 8
+
 ```{r}
 #Pipes step by step
 #Select
@@ -74,6 +84,7 @@ surveys_sml
 ```
 
 Chunk 9
+
 ```{r}
 #Selecting and filtering using pipes
 surveys %>%
@@ -84,6 +95,7 @@ surveys %>%
 ## Pipes Example #2
 
 Chunk 10
+
 ```{r}
 #Pipes step by step
 #Original data
@@ -91,6 +103,7 @@ surveys
 ```
 
 Chunk 11
+
 ```{r}
 #Pipes step by step
 #Filter
@@ -99,6 +112,7 @@ surveys2
 ```
 
 Chunk 12
+
 ```{r}
 #Pipes step by step
 #Select
@@ -107,14 +121,17 @@ surveys_sml
 ```
 
 Chunk 13
+
 ```{r}
 #Write the pipe
-surveys %>%
+surveys %>% filter(genus == "Peromyscus", species == "maniculatus") %>% 
+  select(sex, genus, species)
 ```
 
 ## Pipes continued
 
 Chunk 14
+
 ```{r}
 #Piping into new object
 surveys_sml <- surveys %>%
@@ -123,6 +140,7 @@ surveys_sml <- surveys %>%
 ```
 
 Chunk 15
+
 ```{r}
 #View new object
 surveys_sml
@@ -131,6 +149,7 @@ surveys_sml
 ## Dplyr: Mutate --------------------------------
 
 Chunk 16
+
 ```{r}
 #New column of weight in kg
 surveys %>%
@@ -138,6 +157,7 @@ surveys %>%
 ```
 
 Chunk 17
+
 ```{r}
 #Second new column based on the first new column
 surveys %>%
@@ -146,6 +166,7 @@ surveys %>%
 ```
 
 Chunk 18
+
 ```{r}
 #New column of weight in kg and view head
 surveys %>%
@@ -154,6 +175,7 @@ surveys %>%
 ```
 
 Chunk 19
+
 ```{r}
 #Remove NAs from weight column
 surveys %>%
@@ -167,6 +189,7 @@ surveys %>%
 # Group_by Example #1
 
 Chunk 20
+
 ```{r}
 #Pipes step by step
 #Original data
@@ -174,6 +197,7 @@ surveys
 ```
 
 Chunk 21
+
 ```{r}
 #Pipes step by step
 #Group by
@@ -182,6 +206,7 @@ surveys2
 ```
 
 Chunk 22
+
 ```{r}
 #Pipes step by step
 #Select
@@ -190,6 +215,7 @@ surveys_sml
 ```
 
 Chunk 23
+
 ```{r}
 #Group_by and summarize
 surveys %>%
@@ -200,6 +226,7 @@ surveys %>%
 ## Group_by and summarized continued
 
 Chunk 24
+
 ```{r}
 #Group_by multiple columns
 surveys %>%
@@ -209,6 +236,7 @@ surveys %>%
 ```
 
 Chunk 25
+
 ```{r}
 #Omit NAs in weight
 surveys %>%
@@ -218,6 +246,7 @@ surveys %>%
 ```
 
 Chunk 26
+
 ```{r}
 #Summarizing multiple variables
 surveys %>%
@@ -229,6 +258,7 @@ surveys %>%
 ```
 
 Chunk 27
+
 ```{r}
 #Arranging in descending order 
 surveys %>%
@@ -242,6 +272,7 @@ surveys %>%
 ## Dplyr: Counting --------------------------------
 
 Chunk 28
+
 ```{r}
 #Count
 surveys %>%
@@ -249,13 +280,15 @@ surveys %>%
 ```
 
 Chunk 29
+
 ```{r}
 #Count a combination of factors
 surveys %>%
-	count(sex, species)
+	count(species, sex)
 ```
 
 Chunk 30
+
 ```{r}
 #Count a combination and arrange table in alphabetical order of species and descending order of the count
 surveys %>%
@@ -266,6 +299,7 @@ surveys %>%
 ## Tidyr: Pivoting --------------------------------
 
 Chunk 31
+
 ```{r}
 #Filter out NAs in weight, group_by plot_id and genus, summarize mean weight in new column
 surveys_gw <- surveys %>%
@@ -277,6 +311,7 @@ surveys_gw
 ```
 
 Chunk 32
+
 ```{r}
 #Pivot from long format to wide format
 surveys_wide <- surveys_gw %>%
@@ -286,6 +321,7 @@ surveys_wide
 ```
 
 Chunk 33
+
 ```{r}
 #Pivot from wide format to long format
 surveys_long <- surveys_wide %>%
@@ -293,6 +329,3 @@ surveys_long <- surveys_wide %>%
 
 surveys_long
 ```
-
-
-
