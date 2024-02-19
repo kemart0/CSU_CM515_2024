@@ -168,12 +168,28 @@ surveys %>%
 ```{r}
 #Q12
 
+surveys_heavy<- surveys %>% 
+ group_by(year) %>% 
+  filter(weight==max(weight, na.rm = TRUE)) %>% 
+  select(year, genus, species_id, weight) %>% 
+  arrange(year)
+
+#I don't understand why there are two entries for 1978, maybe because they have two animals with the same weight as the max?
+
+surveys_heavy
+
 ```
 
 #### Q13: Reshape the surveys data frame with year as columns, plot_id as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function n_distinct() to get the number of unique genera within a particular chunk of data. It’s a powerful function! See ?n_distinct for more.
 
 ```{r}
-#Q13
+#Q13- this will involve pivoting from long to wide?
+
+wide_surveys<- surveys %>% 
+  group_by(plot_id, year) %>% 
+  summarize(number_genera=n_distinct(genus)) %>% 
+  pivot_wider(names_from = year, values_from = number_genera) %>% 
+  print()
 
 ```
 
