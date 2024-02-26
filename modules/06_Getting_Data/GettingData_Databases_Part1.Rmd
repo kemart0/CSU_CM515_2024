@@ -177,6 +177,7 @@ library(xml2)
 
 elt2 = read_xml('./Example_Data/celegans_elt2.xml')
 elt2_parsed = xmlParse(elt2)
+#instead of clicking through all the tabs it will put it in a table
 Dbtag = getNodeSet(elt2_parsed, "//Dbtag")
 elt2_df = xmlToDataFrame(elt2_parsed, nodes=Dbtag)
 print(elt2_df)
@@ -208,7 +209,9 @@ library(rvest)
 
 url <- read_html("https://en.wikipedia.org/wiki/COVID-19_pandemic_deaths#:~:text=There%20have%20been%20reported%207%2C026%2C534,16%20and%2028.2%20million%20deaths.")
 tables <- html_nodes(url, "table")
+#need to find the appropriate table from the webpage
 data7 <- html_table(tables[10])
+#list of nodes, make it a data frame and then we can actually read it!
 data7 <- as.data.frame(data7)
 print(head(data7, 5))
 ```
