@@ -210,6 +210,8 @@ iris %>%
   theme_bw() +
   theme(plot.title = element_text(hjust = 0.5)) 
 
+library(ggthemes)
+?ggthemes
 ```
 # 5c. Manipulating Geometry with Aesthetics
 
@@ -459,6 +461,7 @@ iris %>%
 
 ```
 
+geom_density_ridges - another geometry to look up library(ggridges?)
 
 # 9. Adding Labels and a Title
 
@@ -659,6 +662,12 @@ You can also use scales to modify your axis. If we graph petal length and petal 
 
 We can use scales to zoom in on that data and provided more detailed tick marks to tease out the details.
 
+```{r}
+library(scales)
+library(RColorBrewer)
+display.brewer.all()
+```
+
 
 ```{r, echo=F, message=F, warning=F}
 ####
@@ -725,5 +734,6 @@ ggsave("021124_First_Graph.jpg")
 # Appendix
 
 ```{r show-code, ref.label = all_labels(), echo = TRUE, eval = FALSE}
-
+library(tidyr)
+head(population)
 ```

@@ -279,10 +279,19 @@ Try making a simple graph for the data and factor by strain.
 ####
 #04#
 ####
+#dUdU_GC_tidy_TK0887-Q<-dUdU_GC_tidy %>% 
+
+dU_GC_practicegraph<- dU_GC_tidy %>%
+  group_by(Hours, Strain) %>%
+  summarize(mean = mean(OD), sd = sd(OD)) %>%
+  group_by(Strain)
+
+dU_GC_practicegraph %>% 
+  ggplot()+
+  geom_line(aes(x=Hours, y=mean, color=Strain))
 
 
   
-
 ```
 # 5. Factoring the Mapping
 
@@ -318,9 +327,11 @@ dU_GC_tidy_Stat <- dU_GC_tidy_Stat %>%
                   "TK0887/TK1898/TK2143" = "\u0394TK0887/\u0394TK1898/\u0394TK2143"))
 
 #now let's see how the graph looks with the mutated data
-
-  
-
+dU_GC_tidy_Stat %>% 
+  ggplot(aes(x=Hours, y=mean, color=Strain, fill=Strain, ymax=mean+sd, ymin=mean-sd))+
+  geom_line(size=0.5)+
+geom_point(size=1.2)+
+  geom_errorbar(width=0.1)
 ```
 
 
@@ -379,8 +390,17 @@ For more on bquote-use help("plotmath")
 ####
 
 help("plotmath")
+dU_GC_tidy_Stat %>% 
+  ggplot(aes(x=Hours, y=mean, color=Strain, fill=Strain, ymax=mean+sd, ymin=mean-sd))+
+  geom_line(size=0.5)+
+geom_point(size=1.2)+
+  geom_errorbar(width=0.1)+
+  labs(title="Alex's Data",
+       subtitle = "85\u00B0C",
+       y=bquote(bold("OD" [600][nm])),
+       x=bquote(bold("Time(Hours)")))#get subscript using brackets
 
-
+#can also use Xlab and y lab as a separate function like + (xlab(label=..."name"))
   
 
 ```
@@ -397,10 +417,20 @@ Instead of every 10 hours, lets look at every 4 hours.
 #08#
 ####
 
-
-                       
-                                                                
-
+dU_GC_tidy_Stat %>% 
+  ggplot(aes(x=Hours, y=mean, color=Strain, fill=Strain, ymax=mean+sd, ymin=mean-sd))+
+  geom_line(size=0.5)+
+geom_point(size=1.2)+
+  geom_errorbar(width=0.1)+
+  labs(title="Alex's Data",
+       subtitle = "85\u00B0C",
+       y=bquote(bold("OD" [600][nm])),
+       x=bquote(bold("Time(Hours)")))+ 
+  scale_x_continuous(breaks=seq(0,24,4))+
+  theme_par()+
+  scale_color_brewer(palette = "Accent")+
+  theme(legend.text=element_text(size=5))
+                     
 ```
 
 # 8b. Fitting the Data
