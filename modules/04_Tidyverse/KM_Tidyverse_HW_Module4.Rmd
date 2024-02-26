@@ -198,6 +198,8 @@ wide_surveys<- surveys %>%
 ```{r}
 #Q14
 
+wide_surveys %>% pivot_longer(names_to = "year", values_to = "number_genera", cols = -plot_id)
+
 ```
 
 
