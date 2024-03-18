@@ -1,57 +1,63 @@
 ---
 title: "Getting Data and Databases - HW"
-author: "Jessica Hill"
+author: "Kelsey Martin"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, error = TRUE, warning = FALSE)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Assignment 6
 
 #### <ins> is due on **March 8th, 2024** <ins>
 
----
+------------------------------------------------------------------------
 
-**Instructions:** 
+**Instructions:**
 
-Please turn in the answers to this assignment as a knitted R markdown document. 
+Please turn in the answers to this assignment as a knitted R markdown document.
 
-- For this, don't forget to comment out all package installations after you install them! You don't want to keep installing things over and over!
+-   For this, don't forget to comment out all package installations after you install them! You don't want to keep installing things over and over!
 
-Answers will be graded for correctness, completeness, and how well the instructions are followed. 
+Answers will be graded for correctness, completeness, and how well the instructions are followed.
 
 Turn in your assignment on canvas
 
-```  
+```         
 @ These are the learning objectives associated with each question
 ```
 
----
+------------------------------------------------------------------------
 
-#### QUESTION 1 (5 pts) 
+#### QUESTION 1 (5 pts)
 
-```
+```         
 @ Students will display that they understand how to obtain data from the SRA.
 ```
 
 Go to the [SRA website](https://www.ncbi.nlm.nih.gov/sra).
 
-This time, search for an organism of your interest, along with a tissue or condition of your interest. You can further narrow it down to a type of NGS platform (i.e., RNAseq) if you'd like. 
+This time, search for an organism of your interest, along with a tissue or condition of your interest. You can further narrow it down to a type of NGS platform (i.e., RNAseq) if you'd like.
 
-Find something that you are interested in and that seems like a good candidate. Don't get anything too big either. 
+Find something that you are interested in and that seems like a good candidate. Don't get anything too big either.
 
-In your search results, **click on your sample of interest**. You should be pulled to a new page. Here, you will see a bunch of information on your sample. Under **Runs**, go ahead and click on your sample accession number. This will pull you to the SRA browser were you can see **Metadata, Analaysis, Reads, Data Access, and FASTA/FASTQ download tabs.** 
+In your search results, **click on your sample of interest**. You should be pulled to a new page. Here, you will see a bunch of information on your sample. Under **Runs**, go ahead and click on your sample accession number. This will pull you to the SRA browser were you can see **Metadata, Analaysis, Reads, Data Access, and FASTA/FASTQ download tabs.**
 
 Go under FASTA/FASTQ and download the FASTQ file.
 
 Go ahead and put your FASTQ files in a new directory called seq_data. Make sure all file paths are correct!
 
-Now read your file in. 
+Now read your file in.
+
+- info about my files: This is ChIP-seq data that was used in a study on LSR2, which is a pleiotropic transcription factor that is differentially regulated between smooth and rough morphotypes of [Mycobacterium abscessus]. The one ending in 57 is the WT Rough morphotype, and the one ending in 52 is the WT Smooth morphotype.
+
+
 ```{r}
 #if (!require("BiocManager", quietly = TRUE))
 #    install.packages("BiocManager")
@@ -59,8 +65,10 @@ Now read your file in.
 #BiocManager::install("ShortRead")
 library(ShortRead)
 
-# this is just an example of what I did. You will have to modify the path for your specific data. 
-seq1 <- readFastq("./seq_data/SRR27190540.fastq.gz", pattern=character(0))
+#THe data I got is from ChIP-seq, which I hope will still work for this... All the other files I was looking at were about 4x as large
+seq1 <- readFastq("./seq_data/SRR25491352.fastq.gz", pattern=character(0))
+
+
 
 # returns sequence information 
 sread(seq1) 
@@ -72,22 +80,23 @@ quality(seq1) # Phred-scaled quality score represents how confident we are in th
 id(seq1) 
 ```
 
-go ahead and read in another sample file or two from the same BioProject. You can add your additional code below. 
+go ahead and read in another sample file or two from the same BioProject. You can add your additional code below.
+
 ```{r}
 # again these file names are just examples of what i did, you will have to modify the paths. 
 
-seq2 <- readFastq("./seq_data/SRR27190541.fastq.gz", pattern=character(0))
+seq2 <- readFastq("./seq_data/SRR25491357.fastq.gz", pattern=character(0))
 ```
 
----
+------------------------------------------------------------------------
 
-#### QUESTION 2 (5 pts) 
+#### QUESTION 2 (5 pts)
 
-```
+```         
 @ Students will do some basic analysis on their downloaded FASTQ file(s)
 ```
 
-Using the samples you read in above, lets try out some more of shortread's functions to interrogate the data. 
+Using the samples you read in above, lets try out some more of shortread's functions to interrogate the data.
 
 ```{r}
 head(seq1)
@@ -100,60 +109,103 @@ summary(seq2)
 ```
 
 ```{r}
-# Performs qualtiy assessment no short reads
+# Performs qualtiy assessment on short reads
 
 qa_data <- qa("./seq_data/", pattern=character(0), type="fastq") # this will output some information about your data
 print(qa_data)
+
+#it says I access parts of the qa analysis with indexing using double square brackets
+
+qa_data[["frequentSequences"]]
+
 ```
 
 Are there any interesting things about your data files that you see?
 
+```         
+I looked at the frequent sequences that occurred in the runs, and a lot of them were really long strings of Guanine. This makes sense actually because Mycobacterial genomes are very GC rich which is part of what makes them such a pain to work with :)
 ```
-put your comments here:
 
+We are pretty limited by what we can do not together and within the scope of the class, so we wont delve deeper into the other shortread functions. But go ahead and check them out.
 ```
-
-We are pretty limited by what we can do not together and within the scope of the class, so we wont delve deeper into the other shortread functions. But go ahead and check them out.  
-
+-   The 'trimtails' function looks pretty useful!
+```
 There are other packages like shortread including "Rqc".
 
 [Rqc](https://www.rdocumentation.org/packages/Rqc/versions/1.6.2) is an optimized tool designed for quality control and assessment of high-throughput sequencing data. It performs parallel processing of entire files and produces a report which contains a set of high-resolution graphics.
 
+------------------------------------------------------------------------
 
----
+#### QUESTION 3 (5 pts)
 
-#### QUESTION 3 (5 pts) 
-
-```
+```         
 @ Students will gain an understanding of the different types of databases out there, how they differ, and what they offer. 
 ```
 
-Pick one **primary database** that you think could be relevant to your research or interests and describe what data you could obtain from there that would help you moving forward. 
+Pick one **primary database** that you think could be relevant to your research or interests and describe what data you could obtain from there that would help you moving forward.
 
 Now do the same with one **secondary database** type.
 
 Finally, do the same for one **specialized database** type.
 
-```
+```         
 Place your responses here:
 
+Primary Database (raw data/info)
+- [GenBank](https://www.ncbi.nlm.nih.gov/genbank/): getting raw sequence information, comparing sequences across species
+
+Secondary Database (Derived info, analysis from primary info)
+-[PATRIC](https://www.bv-brc.org/): This is a bioinformatics resource for bacterial human pathogens. It integrates research on bacterial species and also gives data on the data available and where it comes from.
+
+Specialized Database
+- [Mycobrowser](https://mycobrowser.epfl.ch/): This is a repository for annotated genes in mycobacteria. This is useful because it shows the orientation of genes and their arrangements in an operon, which is important to consider when manipulating genes.
+- [TB Genome Annotation Portal](https://orca2.tamu.edu/U19/): This is similar to Mycobrowser, but this one is actually maintained. And it has a lot more information like GO terms and RNA seq data linked to the gene being searched
+
 
 ```
 
----
+------------------------------------------------------------------------
 
-#### QUESTION 4 (5 pts) 
+#### QUESTION 4 (5 pts)
 
-```
+```         
 @ Students will learn about a specific R function of their choice, and impliment an example of its usage. 
 ```
 
-Choose an R function you think is interesting and would like to learn more about. Also mention the R package it can be found in. 
+Choose an R function you think is interesting and would like to learn more about. Also mention the R package it can be found in.
 
-Describe what the function does or how it can be used. 
+```{r}
+#I am interested in using BiomaRt to retrieve gene information and annotations
 
-Give a functional example of its use. I want to try it too. 
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
 
-Also provide a link to some documentation describing this function. The **[NAME](url)** notation is used for creating a hyperlink. You can provide the link below by filling in the syntax: 
+BiocManager::install("biomaRt")
+```
 
-[Your website here]()
+Describe what the function does or how it can be used.
+```
+This package from BioConductor is a way to interact with gene information databases and get that information into R. You can look up a sequence, search for genes, get gene annotations, and much much more.
+It is most well documented for use with the [ENSEMBL database](https://useast.ensembl.org/index.html).
+It also has pretty good documentation on [BioConductor](https://bioconductor.org/packages/release/bioc/manuals/biomaRt/man/biomaRt.pdf)
+and the [Github page](https://github.com/grimbough/biomaRt) is up to date. 
+```
+
+Give a functional example of its use. I want to try it too.
+```{r}
+library(biomaRt)
+# Specify we are using Ensembl dataset
+ensembl <- useMart("ensembl")
+#specify which species dataset to use
+ensembl <- useDataset("hsapiens_gene_ensembl", mart = ensembl)
+#One thing I can do with it is get the sequence of a gene I'm interested. Here I am getting the coding sequence for CBL, a proto-oncogene involved in ubiquitination that my undergraduate lab studied
+cbl_sequence <- getSequence(id = "ENSG00000110395", type = "ensembl_gene_id", mart = ensembl, seqType="coding")
+
+cbl_sequence
+
+```
+
+
+
+Also provide a link to some documentation describing this function. The [**NAME**](url) notation is used for creating a hyperlink. You can provide the link below by filling in the syntax:
+
