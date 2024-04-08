@@ -12,9 +12,9 @@
 | March 4    | March 6    | 7      | Proteomics                  | Corey Broeckling| 8    |
 | March 11   | March 13   | 8      | SPRING BREAK                | SPRING BREAK   | 9    |
 | |  | | | | |
-| **March 18**   | **March 20**   | **9**      | **Deeptools**                   | **Swygert**        | **10**   |
-| **March 25**   | **March 27**   | **10**     | **Image Analysis**              | **Melea/Rosi**     | **11**   |
-| **April 1**    | **April 3**    | **11**     | **Issues in Reproducible Research** | **Ben Prytherch**| **12**   |
+| March 18   | March 20   | 9      | Deeptools                  | Swygert     | 10   |
+| March 25  | March 27 | 10    | Image Analysis             | Melea/Rosi    | 11  |
+| April 1    | April 3  | 11    | Issues in Reproducible Research | Ben Prytherch| 12   |
 | **April 8**    | **April 10**   | **12**     | **Microbiome**                  | **Metcalf**        | **13**   |
 | **April 15**   | **April 17**   | **13**     | **Presenting Data**             | **Dan Sloan**      | **14**   |
 | **April 22**   | **April 24**   | **14**     | **Python Notebooks**            | **Connor**         | **15**   |
