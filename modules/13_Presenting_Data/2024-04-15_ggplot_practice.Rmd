@@ -1,0 +1,52 @@
+---
+title: "sloan_ggplotpractice"
+author: "Kelsey Martin"
+date: "2024-04-15"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+RNAseq = read.delim ("SlidingWindow.txt")
+RNAseq_chrom21 = RNAseq[which(RNAseq$Chrom==21),]
+
+
+```
+
+plots:
+```{r}
+singlePlot = ggplot (data=RNAseq_chrom21, aes(x=Pos, y=RCM, color=Region)) + geom_point()
+singlePlot
+
+```
+
+```{r}
+library(viridis)
+singlePlot2 = ggplot (data=RNAseq_chrom21, aes(x=Pos, y=RCM, color=Enrichment)) + geom_point()
+
+
+singlePlot2 + scale_color_viridis()
+
+ggplot (data=RNAseq_chrom21, aes(x=Pos, y=RCM, color=Enrichment)) + geom_point() + scale_color_viridis() + scale_y_log10()
+
+#add labels, convert axis to kb instead of bp, make points smaller, and add a theme
+
+ggplot (data=RNAseq_chrom21, aes(x=Pos/1000, y=RCM, color=Enrichment)) + geom_point(size=0.5) + scale_color_viridis() + scale_y_log10() + xlab("Nucleotide Position (kb)") + ylab("Read Count Per Million") + theme_bw()
+
+```
+
+Facet by chromosome number:
+
+```{r}
+multiPlot<- ggplot (data=RNAseq, aes(x=Pos/1000, y=RCM, color=Enrichment)) + geom_point(size=0.5) + scale_color_viridis() + scale_y_log10() + xlab("Nucleotide Position (kb)") + ylab("Read Count Per Million") + theme_bw() + scale_x_continuous (breaks=c(0,75,150)) + facet_wrap(~Chrom, nrow=7) 
+
+multiPlot
+
+```
+store as pdf:
+
+```{r}
+pdf ("multiPlot.pdf")  
+multiPlot  
+dev.off()
+```

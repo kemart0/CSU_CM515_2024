@@ -1,0 +1,41 @@
+---
+title: "2024-04-15_groupproject"
+author: "Kelsey Martin"
+date: "2024-04-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load libraries and dataset
+```{r}
+library(ggplot2)
+library(ggthemes)
+MutationRate = read.delim ("MutationRate.txt")
+
+```
+
+graph:
+```{r}
+groupgraph<- ggplot (data=MutationRate, aes(x=Genotype, y=MutationRate, color=Genotype))+
+geom_point(alpha=0.5, size=2)+
+  ylab("Log10 Mutation Rate")+
+scale_y_log10()+
+facet_grid(MutationType~Genome)+
+  theme_stata()
+```
+We decided to do geom_point() because we only have three replicates, so it would show up well as a scatter plot.
+We also changed this to a log scale because the data was spread out and some things were lost at the linear scale, everything was all clustered at the bottom and hard to see.
+We then faceted by both genome and mutation type using facet grid, so we can visualize the differences in genome and types of mutations that are happening.
+
+
+
+Saving graph:
+
+```{r}
+pdf ("2024-04015_DataViz_GroupGraph.pdf")  
+groupgraph  
+dev.off()
+```
